@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar-Latn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffe6ef">
+<title>3ashan Salomaa ♡</title>
+<!-- MiSans by Xiaomi: official web font service -->
+<link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:300,400,500,600,700:Arabic,Latin&display=swap">
+<style>
+  :root { --pink:#f7a9c4; --deep:#b84e78; --ink:#71364f; --paper:#fffafc; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; color:var(--ink);
+    font-family:"MiSans", "Mi Sans", Arial, sans-serif;
+    background:
+      radial-gradient(circle at 15% 15%, #fff 0 2px, transparent 3px),
+      radial-gradient(circle at 80% 25%, #fff8 0 3px, transparent 4px),
+      linear-gradient(145deg,#fff1f6,#ffdce9 52%,#fff0f5);
+    background-size:120px 120px,170px 170px,auto;
+    display:grid; place-items:center; padding:28px 16px 42px;
+  }
+  .glow { position:fixed; width:360px; height:360px; border-radius:50%; background:#fff8; filter:blur(65px); pointer-events:none; }
+  .glow.one { top:-180px; left:-120px; } .glow.two { bottom:-210px; right:-100px; }
+  .wrap { width:min(100%,680px); text-align:center; position:relative; z-index:1; }
+  .eyebrow { letter-spacing:.18em; text-transform:uppercase; font:600 11px/1.5 "MiSans",Arial,sans-serif; color:#b66a88; }
+  h1 { font-size:clamp(38px,8vw,64px); font-weight:600; margin:12px 0 8px; color:#a9446d; }
+  .sub { font:500 14px/1.7 "MiSans",Arial,sans-serif; color:#98647a; margin:0 auto 22px; }
+  .stage { height:340px; display:grid; place-items:center; perspective:1200px; margin-top:2px; }
+  .envelope {
+    width:min( min(88vw,440px), 440px); height:270px; position:relative; cursor:pointer;
+    filter:drop-shadow(0 24px 28px #b44f7730); transition:transform .45s cubic-bezier(.2,.8,.2,1);
+    outline:none; transform-style:preserve-3d; -webkit-tap-highlight-color:transparent;
+  }
+  .envelope:hover { transform:translateY(-5px) rotate(-.4deg); }
+  .envelope:focus-visible { outline:3px solid #d8799d; outline-offset:12px; border-radius:14px; }
+  .back { position:absolute; inset:0; background:linear-gradient(145deg,#f6b5ca,#e987aa); border-radius:15px; z-index:1; }
+  .letter {
+    position:absolute; left:5%; width:90%; height:91%; bottom:3%;
+    background:linear-gradient(160deg,#fffefd,#fff5f8); border:1px solid #f9dce6; border-radius:10px;
+    padding:22px 18px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 8px 25px #8c36551c; z-index:2;
+    transform:translateY(0) scale(.98); transform-origin:bottom center;
+    transition:transform 1.15s cubic-bezier(.16,1,.3,1), box-shadow .8s;
+  }
+  .letter .mini { font:600 10px "MiSans",Arial,sans-serif; letter-spacing:.2em; color:#c47b98; text-transform:uppercase; }
+  .letter strong { font:600 30px "MiSans",Arial,sans-serif; color:#a9446d; margin:10px 0; }
+  .letter p { font:500 13px/1.6 "MiSans",Arial,sans-serif; color:#a36b81; margin:0; }
+  .front {
+    position:absolute; inset:0; z-index:3; border-radius:0 0 15px 15px;
+    background:linear-gradient(145deg,#f8b8ce,#ed8fb0);
+    clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+  }
+  .front:before,.front:after { content:""; position:absolute; top:0; bottom:0; width:50%; opacity:.15; }
+  .front:before { left:0; background:linear-gradient(35deg,transparent 49%,#a83e68 50%,transparent 51%); }
+  .front:after { right:0; background:linear-gradient(-35deg,transparent 49%,#a83e68 50%,transparent 51%); }
+  .flap {
+    position:absolute; inset:0; z-index:5; transform-origin:top center;
+    transition:transform 1s cubic-bezier(.2,.75,.2,1), z-index 0s linear .5s;
+    background:linear-gradient(155deg,#fbd0df,#f3a4bf);
+    clip-path:polygon(0 0,100% 0,50% 59%);
+    filter:drop-shadow(0 5px 5px #b64d7420); backface-visibility:visible;
+  }
+  .seal {
+    position:absolute; z-index:6; left:50%; top:57%; transform:translate(-50%,-50%);
+    width:52px; height:52px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff9fc,#ffe4ee);
+    color:#c65d83; display:grid; place-items:center; font-size:26px;
+    box-shadow:0 5px 16px #9d3e6225, inset 0 0 0 1px #efb3c8;
+    transition:opacity .35s, transform .45s;
+  }
+  .hint { font:400 13px "MiSans",Arial,sans-serif; color:#a35d7b; margin-top:0; }
+  .envelope.open { transform:translateY(8px); }
+  .envelope.open .flap { transform:rotateX(180deg); z-index:1; transition:transform 1s cubic-bezier(.2,.75,.2,1),z-index 0s linear .5s; }
+  .envelope.open .letter { transform:translateY(-150px) scale(1.045); box-shadow:0 18px 35px #8c36552a; transition-delay:.35s; }
+  .envelope.open .seal { opacity:0; transform:translate(-50%,-50%) scale(.25) rotate(25deg); }
+  .letter-full {
+    display:none; text-align:left; margin:0 auto; width:min(100%,620px);
+    background:linear-gradient(150deg,#fffdfd,#fff8fb); border:1px solid #f5c5d7; border-radius:22px;
+    padding:clamp(22px,5vw,42px); box-shadow:0 22px 60px #a94b7020;
+    animation:letterReveal 1s cubic-bezier(.16,1,.3,1) both; position:relative;
+  }
+  .letter-full:before { content:""; position:absolute; inset:8px; border:1px solid #f9e1e9; border-radius:16px; pointer-events:none; }
+  .letter-full.show { display:block; }
+  .letter-full h2 { text-align:center; font:600 30px "MiSans",Arial,sans-serif; color:#a9446d; margin:0 0 22px; position:relative; }
+  .letter-full p { font:500 16px/2 "MiSans",Arial,sans-serif; color:#75465a; margin:0 0 15px; position:relative; overflow-wrap:anywhere; }
+  .sign { text-align:right; color:#b24e76; font:600 17px "MiSans",Arial,sans-serif; margin-top:26px; position:relative; }
+  .music-card { display:none; margin:4px auto 20px; width:min(100%,620px); border:1px solid #f3c2d4; border-radius:18px; background:#fff9fcdd; padding:15px; box-shadow:0 12px 30px #a94b7014; }
+  .music-card.show { display:block; animation:letterReveal .7s ease both; }
+  .music-title { color:#a9446d; font:600 15px "MiSans",Arial,sans-serif; margin:0 0 4px; }
+  .music-note { color:#a36b81; font:400 12px/1.6 "MiSans",Arial,sans-serif; margin:0 0 12px; }
+  .music-button { border:0; border-radius:999px; padding:11px 20px; background:linear-gradient(135deg,#e98caf,#cc628b); color:white; font:600 13px "MiSans",Arial,sans-serif; cursor:pointer; box-shadow:0 7px 16px #c85e872e; }
+  .music-button:active { transform:scale(.98); }
+  .again { display:none; border:1px solid #e7a6bd; background:#fff8fb; color:#a9446d; padding:11px 20px; border-radius:30px; cursor:pointer; margin:18px auto 0; font:400 13px "MiSans",Arial,sans-serif; }
+  .again.show { display:inline-block; }
+  .tiny { text-align:center; color:#bd7893; font:400 10px "MiSans",Arial,sans-serif; margin-top:28px; letter-spacing:.1em; }
+  .heart { position:fixed; bottom:-30px; color:#e77fa4; opacity:0; animation:float 6s linear forwards; pointer-events:none; z-index:0; }
+  @keyframes float { 0%{transform:translateY(0) rotate(0);opacity:0} 10%{opacity:.65} 100%{transform:translateY(-110vh) rotate(35deg);opacity:0} }
+  @keyframes letterReveal { from{opacity:0;transform:translateY(32px) scale(.97);filter:blur(3px)} to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)} }
+  @media(max-width:480px) {
+    .stage{height:300px}.envelope{height:230px}
+    .envelope.open .letter{transform:translateY(-128px) scale(1.025)}
+    .letter-full p{font-size:15px;line-height:1.9}
+    .letter-full{padding:24px 20px}
+  }
+  @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+</style>
+</head>
+<body>
+<div class="glow one"></div><div class="glow two"></div>
+<main class="wrap">
+  <div class="eyebrow">7aga soghayara 3ashanek</div>
+  <h1>Hiii, Salomaa 🫰🏻🫰🏻</h1>
+  <p class="sub">salomtyy ana 3amlt el website dah 3lshank yarb ye3gbek🫶🏻</p>
+  <div class="stage">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Efta7 el resala">
+      <div class="back"></div>
+      <div class="letter"><span class="mini">met2afla be ebtesama</span><strong>3ashanek</strong><p>Dosy 3ashan tefta7y ♡</p></div>
+      <div class="front"></div><div class="flap"></div><div class="seal">♥</div>
+    </div>
+  </div>
+  <div class="hint" id="hint">Dosy 3ala el zarf 3ashan tefta7y ♡</div>
+
+  <section class="music-card" id="musicCard" aria-label="O8neya 3ashan Salomaa">
+    <p class="music-title">O8neya soghayara 3ashanek ♡</p>
+    <p class="music-note">Elissa — Aayshalak · Full song ♡</p>
+    <a class="music-button" id="musicButton" href="https://open.spotify.com/track/6wE5bUgyErJTzGBqqbjdGo" target="_blank" rel="noopener noreferrer" style="display:inline-block;text-decoration:none">♫ Esma3y el o8neya kamla 3ala Spotify</a>
+  </section>
+
+  <article class="letter-full" id="fullLetter">
+    <h2>Salomaaa ❤️</h2>
+    <p>Ana msh 3aref abda2 mn fein bs bgd ana far7an awy enny 3reftak w enna etkalemna w 2arabna mn ba3d.</p>
+    <p>El a8rab eny kont fakerak fel awel maghroora w keda 😂 w kont 3arefek mn 6 ebteda2y, bas 3omry ma kont at5ayel enek teb2y mn aktar el nas elly ba7eb akalemha w astana akalemha.</p>
+    <p>Kol ma ba3rafek aktar bakteshf feeki 7agat bt5aleeny a7eb el kalam m3aky aktar, enty zakeya awy w tare2t tafkeerek 7aga bgd ba7ebha.</p>
+    <p>Bs aktar 7aga momayzaki 3andy enek bgd aktar wa7da 7ases enha fahmany, bafham ma3aki mn 8er ma a7tag ashra7 kteer, w ba7es eny 3ala tabee3ty awy w msh me7tag amsl wala afakar fel kalam abl ma a2olo.</p>
+    <p>W mahma 2oltlk bgd mesh htt5yly, bs enty 3andek taree2a 8areeba awy fe enek t8ayary moodi fe sawaany 😂❤️ momken ab2a ma5nou2 aw mesh tay2 nafsy w awel ma akalemek ala2y nafsy baḍ7ak. 😂</p>
+    <p>dah 8er en el wa2t elly ba2deh m3akyy bey3dyy bsor3a m3aki, w ba7eb el dahk w el kalam w el tafaseel el soghayara elly benna.</p>
+    <p>Enty msh shakhs 3ady 3andy ya Salomaa, we w3omrk ma htt5ayly wgodk f7ayatii b2a fare2 m3aya ezaay.</p>
+    <p>W ya rab nefdal keda daiman, nḍ7ak w netkalem fe kol 7aga, w nefdal 3ala tabee3etna m3 ba3d.</p>
+    <p>W a5eran, 3ayezek te3rafy enek mn a7la el 7agat elly 7asaletly, w ana bgd mabsoot enny 3reft Salomaa el 7a2ee2eya ❤️</p>
+    <div class="sign">— wa7ed mabsoot awy enno 3erfek ♡</div>
+  </article>
+  <button class="again" id="again">2afly el resala</button>
+  <div class="tiny">3amelt el website dah be ehtemam 5aso 3ashanek ♡</div>
+</main>
+<script>
+  const envelope = document.getElementById('envelope');
+  const letter = document.getElementById('fullLetter');
+  const hint = document.getElementById('hint');
+  const again = document.getElementById('again');
+  const musicCard = document.getElementById('musicCard');
+  let opened = false;
+  function toggleLetter() {
+    opened = !opened;
+    envelope.classList.toggle('open', opened);
+    letter.classList.toggle('show', opened);
+    musicCard.classList.toggle('show', opened);
+    again.classList.toggle('show', opened);
+    hint.textContent = opened ? 'Resala soghayara menny leky ♡' : 'Dosy 3ala el zarf 3ashan tefta7y ♡';
+    if (opened) {
+      for (let i=0;i<15;i++) setTimeout(makeHeart, i*115);
+      setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'start'}), 900);
+    } else {
+       letter.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+  envelope.addEventListener('click', toggleLetter);
+  envelope.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleLetter();} });
+  again.addEventListener('click', toggleLetter);
+  function makeHeart() {
+    const h=document.createElement('span'); h.className='heart'; h.textContent=Math.random()>.5?'♥':'♡';
+    h.style.left=Math.random()*100+'vw'; h.style.fontSize=(14+Math.random()*19)+'px';
+    h.style.animationDuration=(4+Math.random()*3)+'s'; document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7500);
+  }
+</script>
+</body>
+</html>
